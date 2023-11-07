@@ -7,6 +7,7 @@ import { SignInButton } from "@clerk/clerk-react";
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { ModeToggle } from "@/components/mode-toggle";
 import { cn } from "@/lib/utils";
+import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 
 import { Logo } from "./logo";
@@ -26,7 +27,7 @@ export const Navbar = () => {
       <div className="md:ml-auto md:justify-end justify-between w-full
       flex items-center gap-x-2">
         {isLoading && (
-          <p>Loading...</p>
+          <Spinner />
         )}
         {!isAuthenticated && !isLoading && (
           <>
