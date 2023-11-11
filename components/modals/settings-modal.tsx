@@ -21,6 +21,7 @@ export const SettingsModal = () => {
               Customize how Jotion looks on your device
             </span>
           </div>
+          <ModeToggle />
         </div>
       </DialogContent>
     </Dialog>
