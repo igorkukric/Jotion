@@ -192,18 +192,39 @@ export const remove = mutation({
 
     const userId = identity.subject;
 
-    const existingDocument = await ctx.db.get(args.id)
+    const existingDocument = await ctx.db.get(args.id);
 
     if (!existingDocument) {
-      throw new Error("Not found")
+      throw new Error("Not found");
     }
 
     if (existingDocument.userId !== userId) {
-      throw new Error("Unauthorized")
+      throw new Error("Unauthorized");
     }
 
-    const document = await ctx.db.delete(args.id)
+    const document = await ctx.db.delete(args.id);
 
-    return document
+    return document;
+  },
+});
+
+export const getSearch = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    const userId = identity.subject;
+
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user", (q) => q.eq("userId", userId))
+      .filter((q) => q.eq(q.field("isArchived"), false))
+      .order("desc")
+      .collect();
+
+    return documents;
   },
 });
