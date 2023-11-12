@@ -2,6 +2,7 @@
 
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { useCoverImage } from "@/hooks/use-cover-image";
+import { SingleImageDropzone } from "@/components/single-image-dropzone";
 
 export const CoverImageModal = () => {
   const coverImage = useCoverImage();
