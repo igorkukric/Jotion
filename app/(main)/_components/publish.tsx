@@ -99,19 +99,19 @@ export const Publish = ({ initialData }: PublishProps) => {
                 className="h-8 rounded-l-none"
               >
                 {copied ? (
-                    <Check className="h-4 w-4"/>
-                ): (
-                    <Copy className="h-4 w-4"/>
+                  <Check className="h-4 w-4" />
+                ) : (
+                  <Copy className="h-4 w-4" />
                 )}
               </Button>
             </div>
             <Button
-                size="sm"
-                className="w-full text-xs"
-                disabled={isSubmitting}
-                onClick={onUnpublish}
+              size="sm"
+              className="w-full text-xs"
+              disabled={isSubmitting}
+              onClick={onUnpublish}
             >
-                Unpublish
+              Unpublish
             </Button>
           </div>
         ) : (
