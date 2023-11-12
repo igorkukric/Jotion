@@ -13,8 +13,8 @@ import { Id } from "@/convex/_generated/dataModel";
 import { fileURLToPath } from "url";
 
 export const CoverImageModal = () => {
-  const params = useParams()
-  const update = useMutation(api.documents.update)
+  const params = useParams();
+  const update = useMutation(api.documents.update);
   const coverImage = useCoverImage();
   const { edgestore } = useEdgeStore();
 
@@ -22,38 +22,31 @@ export const CoverImageModal = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onClose = () => {
-    setFile(undefined)
-    setIsSubmitting(false)
-    coverImage.onClose()
-  }
+    setFile(undefined);
+    setIsSubmitting(false);
+    coverImage.onClose();
+  };
 
   const onChange = async (file?: File) => {
     if (file) {
-      setIsSubmitting(true)
-      setFile(file)
+      setIsSubmitting(true);
+      setFile(file);
 
-      let res;
+      const res = await edgestore.publicFiles.upload({
+        file,
+        options: {
+          replaceTargetUrl: coverImage.url,
+        },
+      });
 
-      if (coverImage.url) {
-        res = await edgestore.publicFiles.upload({
-          file,
-          options: {
-            replaceTargetUrl: coverImage.url,
-          }
-        })
-      } else {
-         res = await edgestore.publicFiles.upload({
-          file
-        })
-      }
       await update({
         id: params.documentId as Id<"documents">,
-        coverImage: res.url
-      })
+        coverImage: res.url,
+      });
 
-      onClose()
+      onClose();
     }
-  }
+  };
 
   return (
     <Dialog open={coverImage.isOpen} onOpenChange={coverImage.onClose}>
@@ -61,12 +54,11 @@ export const CoverImageModal = () => {
         <DialogHeader>
           <h2 className="text-center text-lg font-semibold">Cover Image</h2>
         </DialogHeader>
-        <SingleImageDropzone 
+        <SingleImageDropzone
           className="w-full outline-none"
           disabled={isSubmitting}
           value={file}
           onChange={onChange}
-
         />
       </DialogContent>
     </Dialog>
