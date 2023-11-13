@@ -1,3 +1,6 @@
+ Jotion empowers users with a versatile set of features, allowing them to effortlessly create and edit text, seamlessly add images, and efficiently manage content, including the ability to delete all elements with ease. Experience a comprehensive platform where content creation and manipulation are at your fingertips, making Jotion the ultimate tool for text and media management.
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
